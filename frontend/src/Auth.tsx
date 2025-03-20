@@ -15,7 +15,7 @@ export default function AuthForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(isSignUp ? "Signing Up" : "Signing In", formData);
+    console.log(isSignUp ? "Signing Up" : "Signing In");
   };
 
   return (

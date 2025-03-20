@@ -41,8 +41,8 @@ const HomePage = () => {
               </button>
             </div>
             {/* image */}
-            <div className="w-[55%] flex items-center px-4">
-              <img src="/home-page.jpeg" alt="coonecting minds" />
+            <div className="w-[55%] flex items-center p-8">
+              <img src="/homePage.jpeg" alt="coonecting minds" className='rounded-md'/>
             </div>
           </div>
         </section>
