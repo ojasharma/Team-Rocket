@@ -8,6 +8,7 @@ import Blogs from "../src/pages/Blogs";
 import NotFound from "../src/pages/NotFound";
 import HomePage from "./HomePage";
 import AuthForm from "./Auth";
+import BusinessIdeaValidator from "./pages/Validator";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => {
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="/home" element={<HomePage/>} />
             <Route path="/api/auth" element={<AuthForm/>} />
+            <Route path="/validator" element={<BusinessIdeaValidator/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
