@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "../src/components/ui/toaster";
 import { Toaster as Sonner } from "../src/components/ui/sonner";
@@ -7,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "../src/pages/Blogs";
 import Blogs from "../src/pages/Blogs";
 import NotFound from "../src/pages/NotFound";
+import HomePage from "./HomePage";
+import AuthForm from "./Auth";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/blogs" element={<Blogs />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/home" element={<HomePage/>} />
+            <Route path="/api/auth" element={<AuthForm/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
