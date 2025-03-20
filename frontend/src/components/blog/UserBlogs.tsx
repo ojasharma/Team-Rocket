@@ -1,82 +1,179 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { PlusIcon, UserIcon } from "lucide-react";
 import BlogCard, { BlogPost } from "./BlogCard";
 import BlogPostEditor from "./BlogPost";
 import { useToast } from "../../hooks/use-toast";
-import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 
-// Sample user data - in a real app this would come from your auth system
-const currentUser = {
-  id: "user123",
-  name: "John Doe",
-  avatar: undefined,
-  bio: "Entrepreneur | Investor | Tech Enthusiast",
-  followers: 245,
-  following: 123,
-};
-
-// Sample blog posts - in a real app this would come from your backend
-const samplePosts: BlogPost[] = [
-  {
-    id: "post1",
-    title: "Launching My New Startup",
-    content:
-      "I'm excited to announce that I've just launched my new startup focused on sustainability. After months of research and planning, we're finally ready to make a positive impact on the environment. Our mission is to reduce carbon emissions through innovative technology solutions. We're looking for passionate individuals to join our team and help us grow. If you're interested in sustainability and technology, please reach out to me.",
-    authorId: currentUser.id,
-    authorName: currentUser.name,
-    authorAvatar: currentUser.avatar,
-    createdAt: new Date(2023, 5, 12),
-    likes: 24,
-    comments: 5,
-  },
-  {
-    id: "post2",
-    title: "Why Networking is Crucial for Startups",
-    content:
-      "In the early stages of a startup, networking can be the difference between success and failure. I've learned that building relationships with other founders, investors, and industry experts provides valuable insights and opportunities. Here are my top tips for effective networking in the startup ecosystem: 1) Be authentic and focus on giving value, 2) Follow up consistently, 3) Attend industry-specific events, 4) Don't be afraid to ask for introductions, 5) Use social media strategically.",
-    authorId: currentUser.id,
-    authorName: currentUser.name,
-    authorAvatar: currentUser.avatar,
-    createdAt: new Date(2023, 4, 28),
-    likes: 36,
-    comments: 12,
-  },
-];
+// API base URL - could move this to an environment variable
+const API_URL = "http://localhost:5000/api";
 
 const UserBlogs = () => {
-  const [posts, setPosts] = useState<BlogPost[]>(samplePosts);
+  const [posts, setPosts] = useState<BlogPost[]>([]);
   const [isWriting, setIsWriting] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState({
+    id: "",
+    name: "",
+    avatar: undefined,
+    bio: "Entrepreneur | Investor | Tech Enthusiast", // You might want to add this to your user schema
+    followers: 0,
+    following: 0,
+  });
   const { toast } = useToast();
 
-  const handleLike = (id: string) => {
-    setPosts(
-      posts.map((post) =>
-        post.id === id ? { ...post, likes: post.likes + 1 } : post
-      )
-    );
-    toast({
-      title: "Post liked!",
-      description: "Your like has been recorded.",
-    });
-  };
+  // Get auth token from localStorage
+  const getToken = () => localStorage.getItem("token");
 
-  const handleSavePost = (
-    newPost: Omit<BlogPost, "id" | "createdAt" | "likes" | "comments">
-  ) => {
-    const post: BlogPost = {
-      ...newPost,
-      id: uuidv4(),
-      createdAt: new Date(),
-      likes: 0,
-      comments: 0,
+  // Config for authenticated requests
+  const authConfig = () => ({
+    headers: {
+      "Content-Type": "application/json",
+      "x-auth-token": getToken(),
+    },
+  });
+
+  // Fetch current user and their blogs when component mounts
+  useEffect(() => {
+    const fetchUserAndBlogs = async () => {
+      try {
+        const token = getToken();
+        if (!token) {
+          toast({
+            title: "Authentication Error",
+            description: "Please log in to view your blogs",
+            variant: "destructive",
+          });
+          setIsLoading(false);
+          return;
+        }
+
+        // Fetch current user data
+        const userRes = await axios.get(`${API_URL}/users/me`, authConfig());
+        setCurrentUser({
+          id: userRes.data.id,
+          name: userRes.data.name,
+          avatar: undefined, // Your API might provide this
+          bio: "Entrepreneur | Investor | Tech Enthusiast", // Default or from API
+          followers: 0, // These could come from your API if you track them
+          following: 0,
+        });
+
+        // Fetch user's blogs
+        const blogsRes = await axios.get(`${API_URL}/blogs`, authConfig());
+
+        // Transform to match our BlogPost interface
+        const formattedPosts: BlogPost[] = blogsRes.data
+          .filter((blog: any) => blog.authorId === userRes.data.id)
+          .map((blog: any) => ({
+            id: blog.id,
+            title: blog.title,
+            content: blog.content,
+            authorId: blog.authorId,
+            authorName: blog.author?.name || userRes.data.name,
+            authorAvatar: undefined, // Your API might provide this
+            createdAt: new Date(blog.createdAt),
+            likes: blog.likes?.length || 0,
+            comments: 0, // If you add comments later
+          }));
+
+        setPosts(formattedPosts);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        toast({
+          title: "Error",
+          description: "Failed to load your blogs. Please try again.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    setPosts([post, ...posts]);
-    setIsWriting(false);
+    fetchUserAndBlogs();
+  }, [toast]);
+
+  const handleLike = async (id: string) => {
+    try {
+      // Call the API to like the blog
+      await axios.post(`${API_URL}/blogs/${id}/like`, {}, authConfig());
+
+      // Update the UI optimistically
+      setPosts(
+        posts.map((post) =>
+          post.id === id ? { ...post, likes: post.likes + 1 } : post
+        )
+      );
+
+      toast({
+        title: "Post liked!",
+        description: "Your like has been recorded.",
+      });
+    } catch (error) {
+      console.error("Error liking post:", error);
+      toast({
+        title: "Error",
+        description: "Failed to like the post. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
+
+  const handleSavePost = async (
+    newPost: Omit<BlogPost, "id" | "createdAt" | "likes" | "comments">
+  ) => {
+    try {
+      // Send the new blog post to the API
+      const response = await axios.post(
+        `${API_URL}/blogs`,
+        {
+          title: newPost.title,
+          content: newPost.content,
+        },
+        authConfig()
+      );
+
+      // Create a formatted post object from the response
+      const createdPost: BlogPost = {
+        id: response.data.id,
+        title: response.data.title,
+        content: response.data.content,
+        authorId: currentUser.id,
+        authorName: currentUser.name,
+        authorAvatar: currentUser.avatar,
+        createdAt: new Date(response.data.createdAt),
+        likes: 0,
+        comments: 0,
+      };
+
+      // Add the new post to the state
+      setPosts([createdPost, ...posts]);
+      setIsWriting(false);
+
+      toast({
+        title: "Success!",
+        description: "Your blog post has been published.",
+      });
+    } catch (error) {
+      console.error("Error saving post:", error);
+      toast({
+        title: "Error",
+        description: "Failed to publish your post. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8 max-w-5xl">
+        <p className="text-center text-gray-600">Loading your blogs...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-5xl">
