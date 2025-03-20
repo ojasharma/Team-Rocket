@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
   return (
     <>
-      <div className="w-full overflow-x-hidden">
+      <div className="w-full overflow-x-hidden nunito">
         <nav className="flex justify-between items-center p-6 bg-gray-800 text-white shadow-md">
           <div className="flex items-center">
             <div className="text-2xl font-bold mr-4 text-yellow-300">
@@ -42,7 +42,7 @@ const HomePage = () => {
             </div>
             {/* image */}
             <div className="w-[55%] flex items-center px-4">
-              <img src="../public/home-page.jpeg" alt="coonecting minds" />
+              <img src="/home-page.jpeg" alt="coonecting minds" />
             </div>
           </div>
         </section>
@@ -50,7 +50,7 @@ const HomePage = () => {
         <section className="bg-gray-800 h-screen flex">
           <div className="w-[60%] flex items-center h-full">
             <img
-              src="../public/laptop.png"
+              src="/laptop.png"
               alt="ui ux"
               className="ml-20 w-[80%]"
             />
@@ -81,7 +81,7 @@ const HomePage = () => {
           </div>
           <div className="w-[80vw] h-[60vh] flex justify-between ">
             <div className="w-[25vw] gap-5 h-full flex items-center flex-col bg-gray-300 p-4 rounded-md">
-              <img src="../public/homepagecard1.webp" alt="" />
+              <img src="/homepagecard1.webp" alt="" />
               <h2 className="text-3xl font-bold">Mentors</h2>
               <h3 className="text-xl text-center">
                 Guiding entrepreneurs with wisdom and experience, mentors
@@ -89,7 +89,7 @@ const HomePage = () => {
               </h3>
             </div>
             <div className="gap-5 w-[25vw] h-full flex items-center flex-col bg-gray-300 p-4 rounded-md">
-              <img src="../public/homepagecard2.webp" alt="" />
+              <img src="/homepagecard2.webp" alt="" />
               <h2 className="text-3xl font-bold">Partners</h2>
               <h3 className="text-xl text-center">
                 Strengthening ventures through collaboration, partners bring
@@ -97,7 +97,7 @@ const HomePage = () => {
               </h3>
             </div>
             <div className="gap-5 w-[25vw] h-full flex items-center flex-col bg-gray-300 p-4 rounded-md">
-              <img src="../public/homepagecard3.webp" alt="" />
+              <img src="/homepagecard3.webp" alt="" />
               <h2 className="text-3xl font-bold">Investors</h2>
               <h3 className="text-xl text-center">
                 Fueling ideas with resources, investors turn entrepreneurial
