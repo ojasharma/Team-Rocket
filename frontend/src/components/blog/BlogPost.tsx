@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -22,7 +21,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { SaveIcon, XIcon } from "lucide-react";
 import { useToast } from "../../hooks/use-toast";
-import { v4 as uuidv4 } from "uuid";
 import { BlogPost } from "./BlogCard";
 
 // Define the form schema with zod
