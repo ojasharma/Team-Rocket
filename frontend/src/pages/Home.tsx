@@ -3,31 +3,26 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="w-full overflow-x-hidden">
-      <nav className="flex justify-between items-center p-6 bg-gray-800 text-white shadow-md">
-        <div className="flex items-center">
-          <div className="text-2xl font-bold mr-4 text-yellow-300">
-            Founderly
+      {/* <nav className="flex justify-between items-center p-6 bg-gray-800 text-white shadow-md">
+          <div className="flex items-center">
+            <div className="text-2xl font-bold mr-4 text-yellow-300">
+              Founderly
+            </div>
           </div>
-        </div>
-        <div>
-          <ul className="flex space-x-8">
-            <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
-              Research
-            </li>
-            <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
-              Validate your Idea
-            </li>
-            <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
-              <Link to="/blogs" className="hover:text-yellow-300">
-                Blog
-              </Link>
-            </li>
-            <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
-              About Us
-            </li>
-          </ul>
-        </div>
-      </nav>
+          <div>
+            <ul className="flex space-x-8">
+              <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
+                Get Started
+              </li>
+              <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
+                Services
+              </li>
+              <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
+                Our Network
+              </li>
+            </ul>
+          </div>
+        </nav> */}
 
       <section
         id="research"
