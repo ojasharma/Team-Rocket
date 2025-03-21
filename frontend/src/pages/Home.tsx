@@ -1,53 +1,22 @@
-import { Link } from "react-router-dom";
-
 const Home = () => {
   return (
     <div className="w-full overflow-x-hidden">
-      {/* <nav className="flex justify-between items-center p-6 bg-gray-800 text-white shadow-md">
-          <div className="flex items-center">
-            <div className="text-2xl font-bold mr-4 text-yellow-300">
-              Founderly
-            </div>
-          </div>
-          <div>
-            <ul className="flex space-x-8">
-              <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
-                Get Started
-              </li>
-              <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
-                Services
-              </li>
-              <li className="cursor-pointer text-gray-400 hover:text-yellow-300 transition-colors duration-300">
-                Our Network
-              </li>
-            </ul>
-          </div>
-        </nav> */}
-
       <section
         id="research"
-        className="flex justify-center items-center h-screen bg-white text-white"
+        className="flex items-center justify-center h-screen bg-gradient-to-br from-yellow-100 to-yellow-300 text-black"
       >
-        <div className="flex flex-col gap-10 items-center w-[75%] h-[64%] bg-gray-800 p-8 rounded-lg shadow-lg">
-          <div className="h-full w-full flex flex-col items-center justify-evenly">
-            <div className="text-3xl font-bold text-yellow-300">
-              Validate the potential of your idea with AI !!
-            </div>
-            <div className="text-lg text-white">
-              Explain your idea in detail below.
-            </div>
-            <div>
-              <input
-                type="text"
-                className="border-2 border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
-                placeholder="Search..."
-              />
-            </div>
-            <button className="border-2 w-28 border-yellow-500 bg-yellow-400 cursor-pointer text-white font-bold py-2 px-4 rounded-md hover:bg-yellow-500">
-              Validate
-            </button>
-          </div>
-        </div>
+        <div className="w-11/12 max-w-xl p-10 rounded-2xl shadow-xl text-center bg-white transform hover:scale-105 transition duration-300 ease-in-out">
+        <div className="text-3xl font-extrabold mb-5 text-yellow-600 animate-pulse">🚀 Validate Your Idea with AI!</div>
+        <div className="text-lg mb-6 text-gray-700">Explain your idea in detail below.</div>
+        <input 
+            type="text" 
+            placeholder="Describe your amazing idea..." 
+            className="w-full p-4 mb-6 border-2 border-gray-300 rounded-lg text-lg focus:outline-none focus:border-yellow-500 shadow-sm hover:shadow-md transition"
+        />
+        <button className="bg-yellow-500 text-black font-bold py-3 px-8 rounded-lg text-lg transition hover:bg-yellow-600 hover:scale-110 transform duration-200">
+            🎯 Validate Now
+        </button>
+    </div>
       </section>
 
       <section id="howitworks" className="bg-gray-800 text-white py-16">
@@ -56,7 +25,7 @@ const Home = () => {
             Validate your idea
           </h2>
           <p className="text-lg text-gray-300">
-            <button className="border-2 border-yellow-500 bg-yellow-400 cursor-pointer text-white font-bold py-2 px-4 rounded-md hover:bg-yellow-500">
+            <button onClick={()=>{}} className="border-2 border-yellow-500 cursor-pointer bg-yellow-400 cursor-pointer text-white font-bold py-2 px-4 rounded-md hover:bg-yellow-500">
               Validate
             </button>
           </p>

@@ -50,17 +50,17 @@ const HomePage = () => {
             <div className="w-full md:w-1/2 flex flex-col gap-6 text-center md:text-left mt-8 md:mt-0">
               <span className="text-yellow-500 font-semibold">BUSINESS MENTORSHIP PLATFORM</span>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight text-gray-800">
-                Grow your business with <span className="text-yellow-500">expert</span> mentors
+                Begin your startup journey by validating your idea today<span className="text-yellow-500"></span>
               </h1>
               <p className="text-gray-600 text-lg max-w-lg mx-auto md:mx-0">
                 An online community where visionary entrepreneurs connect with industry veterans for targeted guidance and support.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <button onClick={()=>{navigate(`api/auth`)}} className="px-8 py-3 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold rounded-lg shadow-lg transform transition duration-300 hover:scale-105 flex items-center justify-center gap-2">
+                <button onClick={()=>{navigate(`api/auth`)}} className="px-8 py-3 bg-yellow-400 cursor-pointer hover:bg-yellow-500 text-gray-900 font-bold rounded-lg shadow-lg transform transition duration-300 hover:scale-105 flex items-center justify-center gap-2">
                   Get Started <ChevronRight size={20} />
                 </button>
-                <button className="px-8 py-3 border-2 border-gray-800 hover:bg-gray-800 hover:text-white text-gray-800 font-bold rounded-lg transition duration-300 flex items-center justify-center gap-2">
-                  Learn More
+                <button onClick={()=>{navigate('/validator')}} className="px-8 py-3 border-2 cursor-pointer border-gray-800 hover:bg-gray-800 hover:text-white text-gray-800 font-bold rounded-lg transition duration-300 flex items-center justify-center gap-2">
+                  Validate Now
                 </button>
               </div>
             </div>

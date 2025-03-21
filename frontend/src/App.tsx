@@ -10,6 +10,7 @@ import HomePage from "./HomePage";
 import AuthForm from "./Auth";
 import BusinessIdeaValidator from "./pages/Validator";
 import Navbar from "./components/ui/Navbar";
+import CaseStudiesPage from "./CaseStudies";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/home" element={<Home/>} />
             <Route path="/api/auth" element={<AuthForm/>} />
             <Route path="/validator" element={<BusinessIdeaValidator/>} />
+            <Route path="/casestudies" element={<CaseStudiesPage/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
