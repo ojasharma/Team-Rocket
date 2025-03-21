@@ -384,7 +384,7 @@ const Startup: React.FC = () => {
             {/* Vertical line */}
             <div className="absolute left-8 top-0 bottom-0 w-1 bg-indigo-200"></div>
 
-            {timelineEvents.map((event, index) => (
+            {timelineEvents.map((event) => (
               <div key={event.id} className="mb-8 relative">
                 {/* Timeline dot */}
                 <div className="absolute left-8 w-4 h-4 bg-indigo-500 rounded-full transform -translate-x-1/2 mt-2 z-10 shadow-md"></div>
