@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, type PanInfo, useAnimation } from "framer-motion";
+import { motion, type PanInfo } from "framer-motion";
 import { X, Heart, RotateCcw, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
@@ -91,10 +91,10 @@ const founders = [
 export default function CoFounder() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState<string | null>(null);
-  const [lastAction, setLastAction] = useState<number | null>(null);
+  
   const [showDetails, setShowDetails] = useState(false);
   const [history, setHistory] = useState<number[]>([]);
-  const controls = useAnimation();
+  
 
   useEffect(() => {
     document.documentElement.classList.remove("dark");
@@ -122,7 +122,7 @@ export default function CoFounder() {
 
     setDirection("right");
     setHistory([...history, currentIndex]);
-    setLastAction(currentIndex);
+    
 
     setTimeout(() => {
       setCurrentIndex(currentIndex + 1);
