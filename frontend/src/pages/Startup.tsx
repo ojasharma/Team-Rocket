@@ -477,6 +477,7 @@ const Startup: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Left side: Line Graph */}
+            <div className="flex flex-col md:col-span-2">
             <div className="md:col-span-2">
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
@@ -515,6 +516,14 @@ const Startup: React.FC = () => {
                 </ResponsiveContainer>
               </div>
             </div>
+            <div>
+              <button className="bg-indigo-500 text-white font-semibold py-2 px-4 ml-10 mt-5 rounded-lg hover:bg-indigo-600"
+              onClick={() => (window.location.href = "http://localhost:3000/")}>
+                Market Bet
+                </button>
+            </div>
+            </div>
+            
 
             {/* Right side: Explanation */}
             <div className="bg-gray-50 p-4 rounded-lg">

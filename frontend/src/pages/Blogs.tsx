@@ -27,7 +27,7 @@ const Blogs = () => {
       </nav>
 
       {/* Blogs Header */}
-      <div className="bg-gray-800 py-12 px-4">
+      {/* <div className="bg-gray-800 py-12 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl font-bold text-yellow-300 mb-4">
             Founder Stories
@@ -36,7 +36,7 @@ const Blogs = () => {
             Share your startup journey and connect with fellow entrepreneurs
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto py-8 px-4">
